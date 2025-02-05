@@ -1,6 +1,7 @@
 package com.haiphamcoder.demo.domain.entity;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,16 +18,21 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "users")
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -48,11 +54,15 @@ public class User extends BaseEntity implements UserDetails {
     private String email;
 
     @Column(name = "enabled", nullable = false)
-    private boolean enabled;
+    @Builder.Default
+    private boolean enabled = true;
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private transient List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

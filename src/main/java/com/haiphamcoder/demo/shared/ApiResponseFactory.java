@@ -2,8 +2,11 @@ package com.haiphamcoder.demo.shared;
 
 import org.springframework.http.HttpStatus;
 
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class ApiResponseFactory {
-    public static ApiResponse<? extends Object> createSuccessResponse(Object data) {
+    public static <T> ApiResponse<T> createSuccessResponse(T data) {
         return new ApiResponse<>(HttpStatus.OK.value(), "Success", data, null, null);
     }
 }

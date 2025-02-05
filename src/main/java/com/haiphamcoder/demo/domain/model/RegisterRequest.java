@@ -1,4 +1,4 @@
-package com.haiphamcoder.demo.shared;
+package com.haiphamcoder.demo.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,19 +15,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApiResponse<T> {
-    @JsonProperty("code")
-    private int code;
+public class RegisterRequest {
 
-    @JsonProperty("message")
-    private String message;
+    @JsonProperty("username")
+    private String username;
 
-    @JsonProperty("data")
-    private T data;
+    @JsonProperty("password")
+    private String password;
 
-    @JsonProperty("meta")
-    private Object meta;
+    @JsonProperty("email")
+    private String email;
 
-    @JsonProperty("errors")
-    private Object errors;
+    @JsonProperty("role")
+    private Role role;
+
 }

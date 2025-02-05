@@ -6,4 +6,6 @@ import com.haiphamcoder.demo.domain.entity.User;
 
 public interface UserRepository {
     Optional<User> getUserByUsername(String username);
+
+    User saveUser(User user);
 }

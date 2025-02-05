@@ -8,6 +8,7 @@ class ApplicationTests {
 
 	@Test
 	void contextLoads() {
+		// This test method is intentionally left empty to verify that the Spring application context loads successfully.
 	}
 
 }

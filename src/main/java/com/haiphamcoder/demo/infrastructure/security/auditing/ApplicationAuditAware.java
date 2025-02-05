@@ -3,6 +3,7 @@ package com.haiphamcoder.demo.infrastructure.security.auditing;
 import java.util.Optional;
 
 import org.springframework.data.domain.AuditorAware;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import com.haiphamcoder.demo.domain.entity.User;
 public class ApplicationAuditAware implements AuditorAware<Long> {
 
     @Override
+    @NonNull
     public Optional<Long> getCurrentAuditor() {
         Authentication authentication = SecurityContextHolder
                 .getContext()
