@@ -3,7 +3,6 @@ package com.haiphamcoder.demo.infrastructure.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,8 +28,9 @@ public class SecurityConfiguration {
                         "/auth/**",
         };
 
+        private static final String ADMIN_ENDPOINT = "/admin/**";
+
         private final JwtAuthenticationFilter jwtAuthenticationFilter;
-        private final AuthenticationProvider authenticationProvider;
         private final UnauthorizedAuthenticationEntryPoint unauthorizedAuthenticationEntryPoint;
 
         @Bean
@@ -42,16 +42,15 @@ public class SecurityConfiguration {
                                 .authorizeHttpRequests(request -> request
                                                 .requestMatchers(AUTH_WHITELIST)
                                                 .permitAll()
-                                                .requestMatchers("/admin/**").hasAnyRole(Role.ADMIN.name())
-                                                .requestMatchers(HttpMethod.GET, "/admin/**").hasAnyAuthority(Permission.ADMIN_READ.name())
-                                                .requestMatchers(HttpMethod.POST, "/admin/**").hasAnyAuthority(Permission.ADMIN_CREATE.name())
-                                                .requestMatchers(HttpMethod.PUT, "/admin/**").hasAnyAuthority(Permission.ADMIN_UPDATE.name())
-                                                .requestMatchers(HttpMethod.DELETE, "/admin/**").hasAnyAuthority(Permission.ADMIN_DELETE.name())
+                                                .requestMatchers(ADMIN_ENDPOINT).hasAnyRole(Role.ADMIN.name())
+                                                .requestMatchers(HttpMethod.GET, ADMIN_ENDPOINT).hasAnyAuthority(Permission.ADMIN_READ.name())
+                                                .requestMatchers(HttpMethod.POST, ADMIN_ENDPOINT).hasAnyAuthority(Permission.ADMIN_CREATE.name())
+                                                .requestMatchers(HttpMethod.PUT, ADMIN_ENDPOINT).hasAnyAuthority(Permission.ADMIN_UPDATE.name())
+                                                .requestMatchers(HttpMethod.DELETE, ADMIN_ENDPOINT).hasAnyAuthority(Permission.ADMIN_DELETE.name())
                                                 .anyRequest()
                                                 .authenticated())
                                 .sessionManagement(session -> session
                                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                                .authenticationProvider(authenticationProvider)
                                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
                 return http.build();
         }
