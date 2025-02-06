@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.haiphamcoder.demo.domain.repository.UserRepository;
 import com.haiphamcoder.demo.infrastructure.security.auditing.ApplicationAuditAware;
+import com.haiphamcoder.demo.shared.UnauthorizedAuthenticationEntryPoint;
 
 import lombok.RequiredArgsConstructor;
 

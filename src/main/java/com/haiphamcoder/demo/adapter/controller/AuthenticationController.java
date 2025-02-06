@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthenticationController extends BaseController{
+public class AuthenticationController{
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")

@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/admin")
 @Tag(name = "admin", description = "Admin controller")
-public class AdminController extends BaseController {
+public class AdminController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<String>> get() {
@@ -26,12 +25,12 @@ public class AdminController extends BaseController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<String>> post(@RequestBody String body) {
+    public ResponseEntity<ApiResponse<String>> post() {
         return ResponseEntity.ok().body(ApiResponseFactory.createSuccessResponse("POST::admin controller"));
     }
 
     @PutMapping
-    public ResponseEntity<ApiResponse<String>> put(@RequestBody String body) {
+    public ResponseEntity<ApiResponse<String>> put() {
         return ResponseEntity.ok().body(ApiResponseFactory.createSuccessResponse("PUT::admin controller"));
     }
 

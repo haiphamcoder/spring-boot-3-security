@@ -9,4 +9,8 @@ public class ApiResponseFactory {
     public static <T> ApiResponse<T> createSuccessResponse(T data) {
         return new ApiResponse<>(HttpStatus.OK.value(), "Success", data, null, null);
     }
+
+    public static <T> ApiResponse<T> createUnauthorizedResponse(String message) {
+        return new ApiResponse<>(HttpStatus.UNAUTHORIZED.value(), message, null, null, null);
+    }
 }
